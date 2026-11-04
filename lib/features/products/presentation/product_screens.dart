@@ -183,14 +183,18 @@ class ProductFormScreen extends ConsumerWidget {
           key: 'categoryId',
           label: 'Category',
           type: AppFieldType.dropdown,
-          initial: product?.categoryId,
+          initial: categories.any((c) => c.id == product?.categoryId)
+              ? product?.categoryId
+              : null,
           options: categories.map((c) => AppFieldOption(c.id, c.name)).toList(),
         ),
         AppField(
           key: 'brandId',
           label: 'Brand',
           type: AppFieldType.dropdown,
-          initial: product?.brandId,
+          initial: brands.any((b) => b.id == product?.brandId)
+              ? product?.brandId
+              : null,
           options: brands.map((b) => AppFieldOption(b.id, b.name)).toList(),
         ),
         AppField(
@@ -198,7 +202,9 @@ class ProductFormScreen extends ConsumerWidget {
           label: 'Unit',
           type: AppFieldType.dropdown,
           required: true,
-          initial: product?.unitId,
+          initial: units.any((u) => u.id == product?.unitId)
+              ? product?.unitId
+              : null,
           options: units
               .map((u) => AppFieldOption(u.id, '${u.name} (${u.symbol})'))
               .toList(),

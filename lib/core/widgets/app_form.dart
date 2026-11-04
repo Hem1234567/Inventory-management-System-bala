@@ -153,36 +153,39 @@ class _AppFormScreenState extends State<AppFormScreen> {
         ],
       ),
       body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 760),
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
-                children: [
-                  if (widget.header != null) ...[
-                    widget.header!,
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-                  if (widget.subtitle != null) ...[
-                    Text(widget.subtitle!, style: theme.textTheme.bodySmall),
-                    const SizedBox(height: AppSpacing.lg),
-                  ],
-                  for (final field in widget.fields) ...[
-                    _buildField(field),
-                    const SizedBox(height: AppSpacing.md),
-                  ],
-                  if (_error != null) ...[
-                    const SizedBox(height: AppSpacing.sm),
-                    Text(
-                      _error!,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: AppColors.danger,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 760),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (widget.header != null) ...[
+                      widget.header!,
+                      const SizedBox(height: AppSpacing.lg),
+                    ],
+                    if (widget.subtitle != null) ...[
+                      Text(widget.subtitle!, style: theme.textTheme.bodySmall),
+                      const SizedBox(height: AppSpacing.lg),
+                    ],
+                    for (final field in widget.fields) ...[
+                      _buildField(field),
+                      const SizedBox(height: AppSpacing.md),
+                    ],
+                    if (_error != null) ...[
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(
+                        _error!,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: AppColors.danger,
+                        ),
                       ),
-                    ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
